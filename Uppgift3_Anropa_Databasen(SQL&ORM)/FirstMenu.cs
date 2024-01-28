@@ -21,7 +21,8 @@ namespace Uppgift3_Anropa_Databasen_SQL_ORM_
             list.Add("\tSortera på förnamn i stignade ordning");
             list.Add("\tSortera på Efternamn i stigande ordning");
             list.Add("\tVisa en lista på alla elever");
-            list.Add("\tLägga till Pesronal");
+            list.Add("\tLägga till Personal");
+            list.Add("\tskriv ut all personal");
             list.Add("\tLägga till Student");
             list.Add("\tAvsluta");
 
@@ -31,6 +32,7 @@ namespace Uppgift3_Anropa_Databasen_SQL_ORM_
 
                 Console.Clear();
                 var students = context.TblStudents.Where(s => s.Klass != 0);
+                var staff = context.TblPersonals.Where(t => t.Titel != -1);
 
                 switch (choice)
                 {
@@ -58,9 +60,12 @@ namespace Uppgift3_Anropa_Databasen_SQL_ORM_
                         InsertInfo.InsertStaff(context);
                         break;
                     case 6:
-                        InsertInfo.InsertStudentInfo(context);
+                        WriteOutInfo.StaffInffo(context, staff);
                         break;
                     case 7:
+                        InsertInfo.InsertStudentInfo(context);
+                        break;
+                    case 8:
                         Console.WriteLine("Programmet avslutas tryck på valfri tangent");
                         Console.ReadKey();
                         Environment.Exit(0);
